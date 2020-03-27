@@ -1,6 +1,6 @@
 import 'question.dart';
 
-class QuizBrain{
+class QuizBrain {
 
   int _questionNumber = 0;
 
@@ -32,18 +32,27 @@ class QuizBrain{
         true),
   ];
 
-  void nextQuestion(){
-    if(_questionNumber < _questionBank.length - 1){
+  void nextQuestion() {
+    if (_questionNumber < _questionBank.length - 1) {
       _questionNumber ++;
+      isFinished();
     }
   }
 
-  String getQuestionText (){
+  String getQuestionText() {
     return _questionBank[_questionNumber].questionText;
   }
 
-  bool getQuestionAnswer(){
+  bool getQuestionAnswer() {
     return _questionBank[_questionNumber].questionAnswer;
+  }
+
+  bool isFinished(){
+    if(_questionNumber == _questionBank.length - 1){
+      return true;
+    } else{
+      return false;
+    }
   }
 
 }

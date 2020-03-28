@@ -36,14 +36,40 @@ class _QuizPageState extends State<QuizPage> {
     bool correctAnswer = quizBrain.getQuestionAnswer();
 
   setState(() {
-    if(correctAnswer == userAnswer){
-      scoreKeeper.add(Icon(Icons.check, color: Colors.green));
+
+    if(quizBrain.isFinished()){
+      Alert(
+        context: context,
+        type: AlertType.warning,
+        title: "End of Quiz",
+        desc: "Quiz just ended, and will restart again!",
+        buttons: [
+          DialogButton(
+            child: Text(
+              "RESTART",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            width: 120,
+          )
+        ],
+      ).show();
+      quizBrain.reset();
+      scoreKeeper.clear();
 
     } else{
-      scoreKeeper.add(Icon(Icons.close, color: Colors.red));
-    }
+      if(correctAnswer == userAnswer){
+        scoreKeeper.add(Icon(Icons.check, color: Colors.green));
+
+      } else{
+        scoreKeeper.add(Icon(Icons.close, color: Colors.red));
+      }
 
       quizBrain.nextQuestion();
+    }
+
     });
   }
 

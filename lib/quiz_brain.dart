@@ -35,7 +35,6 @@ class QuizBrain {
   void nextQuestion() {
     if (_questionNumber < _questionBank.length - 1) {
       _questionNumber ++;
-      isFinished();
     }
   }
 
@@ -49,10 +48,16 @@ class QuizBrain {
 
   bool isFinished(){
     if(_questionNumber == _questionBank.length - 1){
+      print("List of queation ended");
       return true;
     } else{
+      print("List goes on");
       return false;
     }
+  }
+
+  void reset(){
+    _questionNumber = 0;
   }
 
 }
